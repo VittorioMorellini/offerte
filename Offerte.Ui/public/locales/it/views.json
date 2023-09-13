@@ -1,0 +1,13 @@
+{
+    "nav": {
+        "table": "Anagrafiche"
+    },
+    "agente": {
+        "index": {
+            "title": "Agenti"
+        },
+        "detail": {
+            "title": "Agente"
+        }
+    }
+}

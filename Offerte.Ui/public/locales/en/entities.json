@@ -1,0 +1,26 @@
+{
+    "agente": {
+        "name": "Nome",
+        "surname": "Cognome",
+        "telefono": "Telefono",
+        "indirizzo": "Indirizzo",
+        "localita": "Località",
+        "codiceFiscale": "Codice fiscale",
+        "cap": "Cap",
+        "mail": "Mail",
+        "ragioneSociale": "Ragione sociale",
+        "partitaIVA": "Partita iva",
+        "numeroFax": "Fax",
+        "budget": "Budget"
+    },
+    "logError": {
+        "date": "Data",
+        "companyId": "Compagnia",
+        "principalId": "Principal",
+        "user": "User",
+        "version": "Version",
+        "userAgent": "User Agent",
+        "error": "Error",
+        "stack": "Stack"
+    }
+}

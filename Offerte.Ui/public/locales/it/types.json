@@ -1,0 +1,16 @@
+{
+    "role":{
+        "admin": "ADMIN",
+        "manager": "MANAGER",
+        "operator": "OPERATOR",
+        "customer": "CUSTOMER"
+    },
+    "sex": {
+        "male": "Maschio",
+        "female": "Femmina"
+    },
+    "language": {
+        "it": "Italiano",
+        "en": "English"
+    }
+}

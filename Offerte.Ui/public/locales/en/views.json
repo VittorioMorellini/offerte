@@ -1,0 +1,13 @@
+{
+    "nav": {
+        "table": "Table"
+    },
+    "agente": {
+        "index": {
+            "title": "Area managers"
+        },
+        "detail": {
+            "title": "Arae manager"
+        }
+    }
+}
