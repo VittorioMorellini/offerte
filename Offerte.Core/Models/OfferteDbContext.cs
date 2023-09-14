@@ -145,8 +145,6 @@ public partial class OfferteDbContext : DbContext
 
         modelBuilder.Entity<Agente>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Agente__3214EC0703317E3D");
-
             entity.HasIndex(e => e.RagioneSociale, "key1");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
@@ -195,6 +193,16 @@ public partial class OfferteDbContext : DbContext
         modelBuilder.Entity<AgenteGruppo>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__AgenteGr__3214EC077F2BE32F");
+
+            entity.HasOne(d => d.IdAgenteNavigation).WithMany(p => p.AgenteGruppo)
+                .HasForeignKey(d => d.IdAgente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__AgenteGru__IdAge__29E1370A");
+
+            entity.HasOne(d => d.IdGruppoNavigation).WithMany(p => p.AgenteGruppo)
+                .HasForeignKey(d => d.IdGruppo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__AgenteGru__IdGru__0A338187");
         });
 
         modelBuilder.Entity<AgentePassword>(entity =>
@@ -215,7 +223,7 @@ public partial class OfferteDbContext : DbContext
             entity.HasOne(d => d.IdAgenteNavigation).WithOne(p => p.AgentePassword)
                 .HasForeignKey<AgentePassword>(d => d.IdAgente)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AgentePassword_Agente");
+                .HasConstraintName("FK__AgentePas__IdAge__0B27A5C0");
         });
 
         modelBuilder.Entity<AumentoFarEast>(entity =>
@@ -232,8 +240,7 @@ public partial class OfferteDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.Formula)
                 .HasMaxLength(1000)
-                .IsUnicode(false)
-                .HasColumnName("FORMULA");
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<CirCom>(entity =>
@@ -416,6 +423,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.ColoreSerigrafiaDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ColoreSerigr__Id__0C1BC9F9");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.ColoreSerigrafiaDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ColoreSer__IdLin__1881A0DE");
         });
 
         modelBuilder.Entity<Corrispondente>(entity =>
@@ -440,7 +457,6 @@ public partial class OfferteDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Document__3214EC071EA48E88");
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -463,6 +479,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.FinituraMeccanicaDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__FinituraMecc__Id__0D0FEE32");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.FinituraMeccanicaDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__FinituraM__IdLin__178D7CA5");
         });
 
         modelBuilder.Entity<FinituraSuperficiale>(entity =>
@@ -482,6 +508,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.FinituraSuperficialeDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__FinituraSupe__Id__0E04126B");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.FinituraSuperficialeDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__FinituraS__IdLin__1699586C");
         });
 
         modelBuilder.Entity<Followup>(entity =>
@@ -517,6 +553,10 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.RagioneSociale)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdTipoPagamentoNavigation).WithMany(p => p.Fornitore)
+                .HasForeignKey(d => d.IdTipoPagamento)
+                .HasConstraintName("FK__Fornitore__IdTip__10E07F16");
         });
 
         modelBuilder.Entity<FornitoreDocumentoMail>(entity =>
@@ -526,6 +566,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.IndirizzoMail)
                 .HasMaxLength(500)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdDocumentoMailNavigation).WithMany(p => p.FornitoreDocumentoMail)
+                .HasForeignKey(d => d.IdDocumentoMail)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Fornitore__IdDoc__12C8C788");
+
+            entity.HasOne(d => d.IdFornitoreNavigation).WithMany(p => p.FornitoreDocumentoMail)
+                .HasForeignKey(d => d.IdFornitore)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Fornitore__IdFor__11D4A34F");
         });
 
         modelBuilder.Entity<Grafite>(entity =>
@@ -545,6 +595,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.GrafiteDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__GrafiteDesc__Id__13BCEBC1");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.GrafiteDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__GrafiteDe__IdLin__14B10FFA");
         });
 
         modelBuilder.Entity<Gruppo>(entity =>
@@ -564,6 +624,11 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(250)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.Label)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Label__IdLingua__15A53433");
         });
 
         modelBuilder.Entity<Lingua>(entity =>
@@ -604,8 +669,6 @@ public partial class OfferteDbContext : DbContext
 
         modelBuilder.Entity<Offerta>(entity =>
         {
-            entity.HasNoKey();
-
             entity.Property(e => e.CodMezzo)
                 .HasMaxLength(4)
                 .IsUnicode(false);
@@ -618,7 +681,6 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.CondizioniResa)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Criticita).HasColumnName("CRITICITA");
             entity.Property(e => e.DataOfferta).HasColumnType("datetime");
             entity.Property(e => e.DataScadenzaOfferta).HasColumnType("date");
             entity.Property(e => e.DataUltimaModifica).HasColumnType("date");
@@ -634,7 +696,6 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.FormaDiPagamento)
                 .HasMaxLength(40)
                 .IsUnicode(false);
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.IdTipoRigidoDf).HasColumnName("IdTipoRigidoDF");
             entity.Property(e => e.Listino)
                 .HasMaxLength(30)
@@ -652,12 +713,11 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.NoteFollowUp)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+            entity.Property(e => e.NoteInterne)
+                .HasMaxLength(200)
+                .IsUnicode(false);
             entity.Property(e => e.NoteMaster).HasColumnType("text");
             entity.Property(e => e.NoteMontaggio).HasColumnType("text");
-            entity.Property(e => e.Noteinterne)
-                .HasMaxLength(200)
-                .IsUnicode(false)
-                .HasColumnName("NOTEINTERNE");
             entity.Property(e => e.NumCircuitiXcart).HasColumnName("NumCircuitiXCart");
             entity.Property(e => e.NumCircuitiYcart).HasColumnName("NumCircuitiYCart");
             entity.Property(e => e.NumeroOfferta).HasComment("riporta il legacy numeroOfferta");
@@ -670,20 +730,124 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Trasporto)
                 .HasMaxLength(18)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.ColoreSerigrafiaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.ColoreSerigrafia)
+                .HasConstraintName("FK__Offerta__ColoreS__30592A6F");
+
+            entity.HasOne(d => d.FinituraMeccanicaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.FinituraMeccanica)
+                .HasConstraintName("FK__Offerta__Finitur__2B947552");
+
+            entity.HasOne(d => d.FinituraSuperficialeNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.FinituraSuperficiale)
+                .HasConstraintName("FK__Offerta__Finitur__2AA05119");
+
+            entity.HasOne(d => d.GrafiteNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.Grafite)
+                .HasConstraintName("FK__Offerta__Grafite__567ED357");
+
+            entity.HasOne(d => d.IdAgenteNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdAgente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Offerta__IdAgent__26CFC035");
+
+            entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdCliente)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Offerta__IdClien__27C3E46E");
+
+            entity.HasOne(d => d.IdFollowUpNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdFollowUp)
+                .HasConstraintName("FK__Offerta__IdFollo__3AD6B8E2");
+
+            entity.HasOne(d => d.IdFornitoreNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdFornitore)
+                .HasConstraintName("FK__Offerta__IdForni__351DDF8C");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdLingua)
+                .HasConstraintName("FK__Offerta__IdLingu__3BCADD1B");
+
+            entity.HasOne(d => d.IdMaterialeTecNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdMaterialeTec)
+                .HasConstraintName("FK__Offerta__IdMater__29AC2CE0");
+
+            entity.HasOne(d => d.IdResaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdResa)
+                .HasConstraintName("FK__Offerta__IdResa__3429BB53");
+
+            entity.HasOne(d => d.IdStatoFarEastNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdStatoFarEast)
+                .HasConstraintName("FK__Offerta__IdStato__54968AE5");
+
+            entity.HasOne(d => d.IdTipoPagamentoNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdTipoPagamento)
+                .HasConstraintName("FK__Offerta__IdTipoP__361203C5");
+
+            entity.HasOne(d => d.IdTipoProdottoNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdTipoProdotto)
+                .HasConstraintName("FK__Offerta__IdTipoP__28B808A7");
+
+            entity.HasOne(d => d.IdTipoRigidoDfNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdTipoRigidoDf)
+                .HasConstraintName("FK__Offerta__IdTipoR__53A266AC");
+
+            entity.HasOne(d => d.IdTrasportatoreNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdTrasportatore)
+                .HasConstraintName("FK__Offerta__IdTrasp__39E294A9");
+
+            entity.HasOne(d => d.IdTrasportoNavigation).WithMany(p => p.OffertaIdTrasportoNavigation)
+                .HasForeignKey(d => d.IdTrasporto)
+                .HasConstraintName("FK__Offerta__IdTrasp__558AAF1E");
+
+            entity.HasOne(d => d.IdTrasportoItaNavigation).WithMany(p => p.OffertaIdTrasportoItaNavigation)
+                .HasForeignKey(d => d.IdTrasportoIta)
+                .HasConstraintName("FK__Offerta__IdTrasp__52AE4273");
+
+            entity.HasOne(d => d.IdValutaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.IdValuta)
+                .HasConstraintName("FK__Offerta__IdValut__7132C993");
+
+            entity.HasOne(d => d.PelabileNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.Pelabile)
+                .HasConstraintName("FK__Offerta__Pelabil__324172E1");
+
+            entity.HasOne(d => d.SerigrafiaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.Serigrafia)
+                .HasConstraintName("FK__Offerta__Serigra__2F650636");
+
+            entity.HasOne(d => d.SolderNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.Solder)
+                .HasConstraintName("FK__Offerta__Solder__2C88998B");
+
+            entity.HasOne(d => d.TendinaturaNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.Tendinatura)
+                .HasConstraintName("FK__Offerta__Tendina__3335971A");
+
+            entity.HasOne(d => d.TestElettricoNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.TestElettrico)
+                .HasConstraintName("FK__Offerta__TestEle__2E70E1FD");
+
+            entity.HasOne(d => d.TipoSolderNavigation).WithMany(p => p.Offerta)
+                .HasForeignKey(d => d.TipoSolder)
+                .HasConstraintName("FK__Offerta__TipoSol__2D7CBDC4");
         });
 
         modelBuilder.Entity<OffertaMontaggio>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__OffertaM__3214EC0706CD04F7");
 
-            entity.Property(e => e.Costoacquisto).HasColumnName("COSTOACQUISTO");
+            entity.HasOne(d => d.IdOffertaNavigation).WithMany(p => p.OffertaMontaggio)
+                .HasForeignKey(d => d.IdOfferta)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Offerta");
         });
 
         modelBuilder.Entity<OffertaRiga>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__OffertaR__3214EC07117F9D94");
 
-            entity.Property(e => e.CircuitilAnciati).HasColumnName("CIRCUITIlANCIATI");
             entity.Property(e => e.DataQuotazione).HasColumnType("datetime");
             entity.Property(e => e.FCinaAereo).HasColumnName("fCinaAereo");
             entity.Property(e => e.FCinaBlind).HasColumnName("fCinaBlind");
@@ -692,6 +856,11 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.FFobHk).HasColumnName("fFobHK");
             entity.Property(e => e.PrezzoDcmQeuro).HasColumnName("PrezzoDcmQEuro");
             entity.Property(e => e.PrezzoDcmQval).HasColumnName("PrezzoDcmQVal");
+
+            entity.HasOne(d => d.IdOffertaNavigation).WithMany(p => p.OffertaRiga)
+                .HasForeignKey(d => d.IdOfferta)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_OffertaRiga_Offerta");
         });
 
         modelBuilder.Entity<OffertaRigaFarEast>(entity =>
@@ -702,6 +871,23 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.DataConfermaCliente).HasColumnType("datetime");
             entity.Property(e => e.DataConsegna).HasColumnType("datetime");
             entity.Property(e => e.DataPartenza).HasColumnType("datetime");
+
+            entity.HasOne(d => d.IdFornitoreNavigation).WithMany(p => p.OffertaRigaFarEast)
+                .HasForeignKey(d => d.IdFornitore)
+                .HasConstraintName("FK_OffertaRigaFE_Fornitore");
+
+            entity.HasOne(d => d.IdOffertaNavigation).WithMany(p => p.OffertaRigaFarEast)
+                .HasForeignKey(d => d.IdOfferta)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_OffertaRigaFE_Offerta");
+
+            entity.HasOne(d => d.IdTrasportatoreNavigation).WithMany(p => p.OffertaRigaFarEast)
+                .HasForeignKey(d => d.IdTrasportatore)
+                .HasConstraintName("FK_OffertaRigaFE_Trasportatore");
+
+            entity.HasOne(d => d.IdTrasportoNavigation).WithMany(p => p.OffertaRigaFarEast)
+                .HasForeignKey(d => d.IdTrasporto)
+                .HasConstraintName("FK_OffertaRigaFE_Trasporto");
         });
 
         modelBuilder.Entity<Parametro>(entity =>
@@ -736,6 +922,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.PelabileDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Pelabile_Desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.PelabileDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__PelabileD__IdLin__1975C517");
         });
 
         modelBuilder.Entity<PostCalcolo>(entity =>
@@ -793,6 +989,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.SerigrafiaDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Serigrafia_Desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.SerigrafiaDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Serigrafi__IdLin__1A69E950");
         });
 
         modelBuilder.Entity<Solder>(entity =>
@@ -812,6 +1018,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.SolderDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Solder_Desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.SolderDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__SolderDes__IdLin__1B5E0D89");
         });
 
         modelBuilder.Entity<SpessoreMateriale>(entity =>
@@ -871,6 +1087,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.TendinaturaDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Tendinatura_Desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.TendinaturaDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Tendinatu__IdLin__1C5231C2");
         });
 
         modelBuilder.Entity<TestElettrico>(entity =>
@@ -890,6 +1116,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.TestElettricoDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TestElettrico_desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.TestElettricoDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__TestElett__IdLin__1D4655FB");
         });
 
         modelBuilder.Entity<TipoPagamento>(entity =>
@@ -933,6 +1169,16 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.TipoRigidoDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TipoRigido_desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.TipoRigidoDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__TipoRigid__IdLin__1E3A7A34");
         });
 
         modelBuilder.Entity<TipoSolder>(entity =>
@@ -952,18 +1198,31 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.TipoSolderDesc)
+                .HasForeignKey(d => d.Id)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TipoSolder_desc");
+
+            entity.HasOne(d => d.IdLinguaNavigation).WithMany(p => p.TipoSolderDesc)
+                .HasForeignKey(d => d.IdLingua)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__TipoSolde__IdLin__1F2E9E6D");
         });
 
         modelBuilder.Entity<Trasportatore>(entity =>
         {
-            entity.HasNoKey();
-
+            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.IndirizzoMail)
                 .HasMaxLength(250)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdTrasportoNavigation).WithMany(p => p.Trasportatore)
+                .HasForeignKey(d => d.IdTrasporto)
+                .HasConstraintName("FK_Trasportatore_TRasporto");
         });
 
         modelBuilder.Entity<Trasporto>(entity =>
@@ -978,6 +1237,10 @@ public partial class OfferteDbContext : DbContext
             entity.Property(e => e.Descrizione)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            entity.HasOne(d => d.IdCorrispondenteNavigation).WithMany(p => p.Trasporto)
+                .HasForeignKey(d => d.IdCorrispondente)
+                .HasConstraintName("FK_Trasport_Corrisp");
         });
 
         modelBuilder.Entity<Valuta>(entity =>

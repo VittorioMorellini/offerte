@@ -5,9 +5,11 @@ namespace Offerte.Core.Models;
 
 public partial class Label
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
-    public short IdLingua { get; set; }
+    public long IdLingua { get; set; }
 
     public string? Descrizione { get; set; }
+
+    public virtual Lingua IdLinguaNavigation { get; set; } = null!;
 }

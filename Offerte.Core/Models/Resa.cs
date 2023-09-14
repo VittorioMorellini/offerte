@@ -5,11 +5,13 @@ namespace Offerte.Core.Models;
 
 public partial class Resa
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public string? Descrizione { get; set; }
 
     public bool CostoZero { get; set; }
 
     public string? Codice { get; set; }
+
+    public virtual ICollection<Offerta> Offerta { get; set; } = new List<Offerta>();
 }

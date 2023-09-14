@@ -5,9 +5,13 @@ namespace Offerte.Core.Models;
 
 public partial class FornitoreDocumentoMail
 {
-    public short IdFornitore { get; set; }
+    public long IdFornitore { get; set; }
 
-    public byte IdDocumentoMail { get; set; }
+    public long IdDocumentoMail { get; set; }
 
     public string? IndirizzoMail { get; set; }
+
+    public virtual DocumentoMail IdDocumentoMailNavigation { get; set; } = null!;
+
+    public virtual Fornitore IdFornitoreNavigation { get; set; } = null!;
 }

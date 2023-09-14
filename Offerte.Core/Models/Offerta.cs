@@ -5,11 +5,11 @@ namespace Offerte.Core.Models;
 
 public partial class Offerta
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int IdUtente { get; set; }
+    public long IdUtente { get; set; }
 
-    public int IdAgente { get; set; }
+    public long IdAgente { get; set; }
 
     public DateTime DataOfferta { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Offerta
 
     public string? CodiceInterno { get; set; }
 
-    public int IdCliente { get; set; }
+    public long IdCliente { get; set; }
 
     public double? DimXfigura { get; set; }
 
@@ -35,7 +35,7 @@ public partial class Offerta
 
     public short? NumCircuitiYcart { get; set; }
 
-    public short? CodTipoProdotto { get; set; }
+    public long? IdTipoProdotto { get; set; }
 
     public short? Criticita { get; set; }
 
@@ -47,15 +47,15 @@ public partial class Offerta
 
     public double? BordoTecnicoMinimo { get; set; }
 
-    public short? CodMaterialeTec { get; set; }
+    public long? IdMaterialeTec { get; set; }
 
     public double? SpessRame { get; set; }
 
     public double? SpessoreFinale { get; set; }
 
-    public short? FinituraSuperficiale { get; set; }
+    public long? FinituraSuperficiale { get; set; }
 
-    public short? FinituraMeccanica { get; set; }
+    public long? FinituraMeccanica { get; set; }
 
     public short? NumeroAsole { get; set; }
 
@@ -63,13 +63,13 @@ public partial class Offerta
 
     public byte? StatoOfferta { get; set; }
 
-    public short? Solder { get; set; }
+    public long? Solder { get; set; }
 
-    public short? TipoSolder { get; set; }
+    public long? TipoSolder { get; set; }
 
-    public short? Serigrafia { get; set; }
+    public long? Serigrafia { get; set; }
 
-    public short? ColoreSerigrafia { get; set; }
+    public long? ColoreSerigrafia { get; set; }
 
     public short? NumForiPerCartella { get; set; }
 
@@ -77,7 +77,7 @@ public partial class Offerta
 
     public double? DiametroMaxForo { get; set; }
 
-    public short? TestElettrico { get; set; }
+    public long? TestElettrico { get; set; }
 
     public byte? TestSondeMobili { get; set; }
 
@@ -87,7 +87,7 @@ public partial class Offerta
 
     public DateTime DataScadenzaOfferta { get; set; }
 
-    public short? Divisa { get; set; }
+    public long? IdValuta { get; set; }
 
     public double? PerimetroFresatura { get; set; }
 
@@ -97,7 +97,7 @@ public partial class Offerta
 
     public bool OttimizzaInUnVerso { get; set; }
 
-    public short? Pelabile { get; set; }
+    public long? Pelabile { get; set; }
 
     public string? CondizioniResa { get; set; }
 
@@ -131,11 +131,11 @@ public partial class Offerta
 
     public string? RevisioneDocumento { get; set; }
 
-    public short? CodGrafite { get; set; }
+    public long? Grafite { get; set; }
 
     public bool PressFit { get; set; }
 
-    public short? CodTendinatura { get; set; }
+    public long? Tendinatura { get; set; }
 
     public short? SeqForiCiechi { get; set; }
 
@@ -145,31 +145,31 @@ public partial class Offerta
 
     public double? CostoLottoCina { get; set; }
 
-    public short? ValutaAcquisto { get; set; }
+    public long? ValutaAcquisto { get; set; }
 
-    public short? IdTrasporto { get; set; }
+    public long? IdTrasporto { get; set; }
 
-    public short? IdResa { get; set; }
+    public long? IdResa { get; set; }
 
     public string? NoteCina { get; set; }
 
-    public short? IdFornitore { get; set; }
+    public long? IdFornitore { get; set; }
 
-    public short? CodTipoPagamento { get; set; }
+    public long? IdTipoPagamento { get; set; }
 
-    public short? IdTrasportatore { get; set; }
+    public long? IdTrasportatore { get; set; }
 
-    public short? CodStatoFarEast { get; set; }
+    public long? IdStatoFarEast { get; set; }
 
     public string? NoteCommerciali { get; set; }
 
-    public short? IdFollowUp { get; set; }
+    public long? IdFollowUp { get; set; }
 
     public string? NoteFollowUp { get; set; }
 
-    public short? CodLingua { get; set; }
+    public long? IdLingua { get; set; }
 
-    public short? IdTrasportoIta { get; set; }
+    public long? IdTrasportoIta { get; set; }
 
     public string? CodNazione { get; set; }
 
@@ -183,7 +183,7 @@ public partial class Offerta
 
     public string? NoteMontaggio { get; set; }
 
-    public short? IdTipoRigidoDf { get; set; }
+    public long? IdTipoRigidoDf { get; set; }
 
     public double? SpessoreInnerLayer { get; set; }
 
@@ -193,7 +193,7 @@ public partial class Offerta
 
     public bool FTunisia { get; set; }
 
-    public string? Noteinterne { get; set; }
+    public string? NoteInterne { get; set; }
 
     public bool ProgrammiMacchina { get; set; }
 
@@ -207,4 +207,60 @@ public partial class Offerta
     /// riporta il legacy numeroOfferta
     /// </summary>
     public int? NumeroOfferta { get; set; }
+
+    public virtual ColoreSerigrafia? ColoreSerigrafiaNavigation { get; set; }
+
+    public virtual FinituraMeccanica? FinituraMeccanicaNavigation { get; set; }
+
+    public virtual FinituraSuperficiale? FinituraSuperficialeNavigation { get; set; }
+
+    public virtual Grafite? GrafiteNavigation { get; set; }
+
+    public virtual Agente IdAgenteNavigation { get; set; } = null!;
+
+    public virtual Cliente IdClienteNavigation { get; set; } = null!;
+
+    public virtual Followup? IdFollowUpNavigation { get; set; }
+
+    public virtual Fornitore? IdFornitoreNavigation { get; set; }
+
+    public virtual Lingua? IdLinguaNavigation { get; set; }
+
+    public virtual Materiale? IdMaterialeTecNavigation { get; set; }
+
+    public virtual Resa? IdResaNavigation { get; set; }
+
+    public virtual StatoFarEast? IdStatoFarEastNavigation { get; set; }
+
+    public virtual TipoPagamento? IdTipoPagamentoNavigation { get; set; }
+
+    public virtual TipoProdotto? IdTipoProdottoNavigation { get; set; }
+
+    public virtual TipoRigido? IdTipoRigidoDfNavigation { get; set; }
+
+    public virtual Trasportatore? IdTrasportatoreNavigation { get; set; }
+
+    public virtual Trasporto? IdTrasportoItaNavigation { get; set; }
+
+    public virtual Trasporto? IdTrasportoNavigation { get; set; }
+
+    public virtual Valuta? IdValutaNavigation { get; set; }
+
+    public virtual ICollection<OffertaMontaggio> OffertaMontaggio { get; set; } = new List<OffertaMontaggio>();
+
+    public virtual ICollection<OffertaRiga> OffertaRiga { get; set; } = new List<OffertaRiga>();
+
+    public virtual ICollection<OffertaRigaFarEast> OffertaRigaFarEast { get; set; } = new List<OffertaRigaFarEast>();
+
+    public virtual Pelabile? PelabileNavigation { get; set; }
+
+    public virtual Serigrafia? SerigrafiaNavigation { get; set; }
+
+    public virtual Solder? SolderNavigation { get; set; }
+
+    public virtual Tendinatura? TendinaturaNavigation { get; set; }
+
+    public virtual TestElettrico? TestElettricoNavigation { get; set; }
+
+    public virtual TipoSolder? TipoSolderNavigation { get; set; }
 }

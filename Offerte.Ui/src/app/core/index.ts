@@ -98,13 +98,13 @@ export function useAppActions() {
                 //TODO
                 let identity = await identityActions.authenticate(username, password);
                 console.log('principal from resp', identity)
-                localStorage.setItem("token", JSON.stringify(identity.token));                    
                 if (!identity) {
                     let error = 'Username or password is incorrect';
                     dispatch(failure(error));
                     return Promise.reject(error);
                 } else {                
                     //FIXME
+                    localStorage.setItem("token", JSON.stringify(identity.token));                    
                     dispatch({ type: 'APP/SET_USER', identity})
                     dispatch(success());
                     return Promise.resolve(identity);

@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class Valuta
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public string? DescrBreve { get; set; }
 
@@ -18,4 +18,6 @@ public partial class Valuta
     public string? DummyPoof { get; set; }
 
     public string? Codice { get; set; }
+
+    public virtual ICollection<Offerta> Offerta { get; set; } = new List<Offerta>();
 }

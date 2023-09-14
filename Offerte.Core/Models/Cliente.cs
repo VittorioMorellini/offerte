@@ -5,9 +5,9 @@ namespace Offerte.Core.Models;
 
 public partial class Cliente
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public short? IdTrasporto { get; set; }
+    public long? IdTrasporto { get; set; }
 
     public string? CodMezzo { get; set; }
 
@@ -16,4 +16,6 @@ public partial class Cliente
     public string? CodNazione { get; set; }
 
     public string? CodClienteAhr { get; set; }
+
+    public virtual ICollection<Offerta> Offerta { get; set; } = new List<Offerta>();
 }

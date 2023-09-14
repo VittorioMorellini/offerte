@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class Strato
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public int? Facce { get; set; }
 

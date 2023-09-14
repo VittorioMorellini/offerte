@@ -5,15 +5,13 @@ namespace Offerte.Core.Models;
 
 public partial class OffertaRiga
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int IdOfferta { get; set; }
+    public long IdOfferta { get; set; }
 
     public int? Quantita { get; set; }
 
     public int? CircuitiBuoniAttesi { get; set; }
-
-    public int? CircuitilAnciati { get; set; }
 
     public int? CircuitiDaProdurre { get; set; }
 
@@ -152,4 +150,8 @@ public partial class OffertaRiga
     public double? RicavoPrgMacchina { get; set; }
 
     public double? RicavoAttrezzTest { get; set; }
+
+    public int? CircuitiLanciati { get; set; }
+
+    public virtual Offerta IdOffertaNavigation { get; set; } = null!;
 }

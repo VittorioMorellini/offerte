@@ -5,7 +5,9 @@ namespace Offerte.Core.Models;
 
 public partial class DocumentoMail
 {
-    public byte Id { get; set; }
+    public long Id { get; set; }
 
     public string? Descrizione { get; set; }
+
+    public virtual ICollection<FornitoreDocumentoMail> FornitoreDocumentoMail { get; set; } = new List<FornitoreDocumentoMail>();
 }

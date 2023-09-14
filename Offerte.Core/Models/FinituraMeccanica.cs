@@ -5,7 +5,11 @@ namespace Offerte.Core.Models;
 
 public partial class FinituraMeccanica
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public string Descrizione { get; set; } = null!;
+
+    public virtual ICollection<FinituraMeccanicaDesc> FinituraMeccanicaDesc { get; set; } = new List<FinituraMeccanicaDesc>();
+
+    public virtual ICollection<Offerta> Offerta { get; set; } = new List<Offerta>();
 }

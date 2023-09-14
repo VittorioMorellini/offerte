@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class Trasporto
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public string? Descrizione { get; set; }
 
@@ -15,7 +15,17 @@ public partial class Trasporto
 
     public string? Codice { get; set; }
 
-    public short? IdCorrispondente { get; set; }
+    public long? IdCorrispondente { get; set; }
 
     public bool EscludiFestivita { get; set; }
+
+    public virtual Corrispondente? IdCorrispondenteNavigation { get; set; }
+
+    public virtual ICollection<Offerta> OffertaIdTrasportoItaNavigation { get; set; } = new List<Offerta>();
+
+    public virtual ICollection<Offerta> OffertaIdTrasportoNavigation { get; set; } = new List<Offerta>();
+
+    public virtual ICollection<OffertaRigaFarEast> OffertaRigaFarEast { get; set; } = new List<OffertaRigaFarEast>();
+
+    public virtual ICollection<Trasportatore> Trasportatore { get; set; } = new List<Trasportatore>();
 }

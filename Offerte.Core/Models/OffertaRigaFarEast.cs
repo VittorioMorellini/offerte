@@ -5,9 +5,9 @@ namespace Offerte.Core.Models;
 
 public partial class OffertaRigaFarEast
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int IdOfferta { get; set; }
+    public long IdOfferta { get; set; }
 
     public double? Quantita { get; set; }
 
@@ -27,9 +27,9 @@ public partial class OffertaRigaFarEast
 
     public DateTime? DataArrivo { get; set; }
 
-    public short? IdTrasporto { get; set; }
+    public long? IdTrasporto { get; set; }
 
-    public short? IdTrasportatore { get; set; }
+    public long? IdTrasportatore { get; set; }
 
     public DateTime? DataPartenza { get; set; }
 
@@ -37,7 +37,7 @@ public partial class OffertaRigaFarEast
 
     public double? QuantitaSpedita { get; set; }
 
-    public short? IdFornitore { get; set; }
+    public long? IdFornitore { get; set; }
 
     public bool TrasportoManuale { get; set; }
 
@@ -50,4 +50,12 @@ public partial class OffertaRigaFarEast
     public double? MetriQ { get; set; }
 
     public double? SpeseTrasporto { get; set; }
+
+    public virtual Fornitore? IdFornitoreNavigation { get; set; }
+
+    public virtual Offerta IdOffertaNavigation { get; set; } = null!;
+
+    public virtual Trasportatore? IdTrasportatoreNavigation { get; set; }
+
+    public virtual Trasporto? IdTrasportoNavigation { get; set; }
 }

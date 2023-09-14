@@ -5,7 +5,11 @@ namespace Offerte.Core.Models;
 
 public partial class Grafite
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public string Descrizione { get; set; } = null!;
+
+    public virtual ICollection<GrafiteDesc> GrafiteDesc { get; set; } = new List<GrafiteDesc>();
+
+    public virtual ICollection<Offerta> Offerta { get; set; } = new List<Offerta>();
 }

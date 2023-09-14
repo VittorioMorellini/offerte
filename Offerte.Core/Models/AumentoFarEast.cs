@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class AumentoFarEast
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public double? ValoreDa { get; set; }
 

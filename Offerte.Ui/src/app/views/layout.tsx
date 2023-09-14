@@ -90,6 +90,7 @@ const useStyle = makeStyles((theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
         //minHeight: '60px'
+        justifyContent: 'center'
     },
     logo: {
         marginLeft: 0,
@@ -108,6 +109,8 @@ const useStyle = makeStyles((theme: Theme) => ({
         flex: 1
     },
     title: {
+        display: 'flex',
+        alignItems: 'center',
         fontWeight: 500,
         fontSize: '1.5rem'
     },
@@ -196,18 +199,16 @@ function LayoutView() {
                 })*/}            
                 <Toolbar>
                     <div className={classes.toolBar}>
-                        <div>
-                            <IconButton
-                                id='drawerMenu'
-                                color="inherit"
-                                aria-label="open drawer"
-                                onClick={handleOpenDrawer}
-                                edge="start"
-                                className={clsx(toggleDrawer && classes.hide)}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        </div>
+                        <IconButton
+                            id='drawerMenu'
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleOpenDrawer}
+                            edge="start"
+                            className={clsx(toggleDrawer && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
                         {/* TODO
                         isAdmin ? 
                         <>
@@ -218,9 +219,7 @@ function LayoutView() {
                         ? <AgencySelector />
                         : null
                         */
-                        <div>
-                            <span className={classes.title}><Typography variant="h5">{import.meta.env.VITE_TITLE}</Typography></span>                            
-                        </div>
+                        <div className={classes.title}><Typography variant="h5">{import.meta.env.VITE_TITLE}</Typography></div>
                         }
                     </div>
                     <div style={{ flex: '0 0 auto', display: 'flex' }}>
@@ -246,7 +245,7 @@ function LayoutView() {
                 <AppBar position="sticky" className={classes.appBar}>
                     <Toolbar>
                         <div className={classes.logoBar}>
-                            <img src="/images/logo.png" style={{maxWidth: 165, maxHeight: 43}} className={classes.logo} />
+                            <img src="/images/logo_layout.png" style={{maxWidth: 165, maxHeight: 43}} className={classes.logo} title="Logo"/>
                         </div>
                         <IconButton onClick={handleOpenDrawer}>
                             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -341,7 +340,7 @@ function UserAvatar() {
                 className={classes.identityAvatar}
                 ref={avatarRef}
                 onClick={handler.toggle}
-            >{userAvatar ? <img src={userAvatar} style={{width: 40}} /> : initials}</Avatar>
+            >{userAvatar ? <img src={userAvatar} style={{width: 40}} title="Avatar"/> : initials}</Avatar>
             <Menu
                 anchorEl={avatarRef.current}
                 keepMounted
@@ -353,7 +352,7 @@ function UserAvatar() {
                 <div className={classes.appBar}>
                     <Avatar sx={{backgroundColor: (theme) => theme.palette.primary.main}} 
                         className={classes.identityAvatar}
-                    >{userAvatar ? <img src={userAvatar} style={{width: 40}} /> : initials}</Avatar>
+                    >{userAvatar ? <img src={userAvatar} style={{width: 40}} title="Avatar"/> : initials}</Avatar>
                     {/* <div style={{marginTop: '1rem', fontWeight: 500}}>{`${identity?.name} ${identity?.surname}`}</div>
                     <div style={{fontSize:'0.75rem'}}>{`${identity?.mail}`}</div> */}
                 </div>

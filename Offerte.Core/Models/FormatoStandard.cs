@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class FormatoStandard
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public bool Standard { get; set; }
 

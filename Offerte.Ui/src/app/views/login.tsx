@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     logo: {
         display: 'block', 
-        margin: '0 auto',
+        margin: '1rem auto',
         maxWidth: '480px',
         [theme.breakpoints.down('sm')]: {
             maxWidth: '360px',
@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     form: {
         margin: 'auto',
-        padding: '10px',
+        padding: '1rem',
+        marginTop: '1rem',
         border: '1px solid #c9c9c9',
         borderRadius: '5px',
         background: '#f5f5f5',
@@ -66,7 +67,7 @@ function LoginView() {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();  
     const { t }  = useTranslation();
-    const { actions } = useAppActions();
+    const { actions, logger } = useAppActions();
     const [username, setUsername] = React.useState<string>('')
     const [password, setPassword] = React.useState<string>('')
 
@@ -83,7 +84,10 @@ function LoginView() {
                 //console.log('route agente')
                 //actions.navigate('/agente')
             })
-            .catch((error: any) => console.log(error));
+            .catch((error: any) => {
+                //console.log(error)
+                logger.error(error, "Sign in error")
+            });
     };
     
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +125,6 @@ function LoginView() {
             <div className={classes.root} onKeyDown={onKeyDown}>
                 <div className={classes.container}>
                     <div className={classes.content}>
-                        <img src="images/logo.png" className={classes.logo} title='Logo'/>
                         <Typography variant="h3" className={classes.text}>{import.meta.env.VITE_TITLE}</Typography>                     
                         <form className={classes.form}>
                             <Box >
@@ -151,6 +154,7 @@ function LoginView() {
                                 <Button variant="contained" color="primary" onClick={login} className={classes.button}>{t('common:login')}</Button>
                             </Box>
                         </form>                        
+                        <img src="images/logo.png" className={classes.logo} title='Logo'/>
                     </div>
                     {/* <img src="/images/sixtema.png" className={classes.sixtema} /> */}
                 </div>

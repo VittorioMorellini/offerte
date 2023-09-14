@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class Agente
 {
-    public short Id { get; set; }
+    public long Id { get; set; }
 
     public string? RagioneSociale { get; set; }
 
@@ -27,8 +27,6 @@ public partial class Agente
 
     public double? FattProg { get; set; }
 
-    public short? AgenteOmega { get; set; }
-
     public string? Password { get; set; }
 
     public bool Supervisore { get; set; }
@@ -43,5 +41,9 @@ public partial class Agente
 
     public string? Surname { get; set; }
 
+    public virtual ICollection<AgenteGruppo> AgenteGruppo { get; set; } = new List<AgenteGruppo>();
+
     public virtual AgentePassword? AgentePassword { get; set; }
+
+    public virtual ICollection<Offerta> Offerta { get; set; } = new List<Offerta>();
 }

@@ -5,7 +5,7 @@ namespace Offerte.Core.Models;
 
 public partial class AgentePassword
 {
-    public short IdAgente { get; set; }
+    public long IdAgente { get; set; }
 
     public bool DirittoSupervisore { get; set; }
 

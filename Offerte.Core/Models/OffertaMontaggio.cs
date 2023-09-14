@@ -5,11 +5,11 @@ namespace Offerte.Core.Models;
 
 public partial class OffertaMontaggio
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int IdOfferta { get; set; }
+    public long IdOfferta { get; set; }
 
-    public int IdUtente { get; set; }
+    public long? IdUtente { get; set; }
 
     public bool TopPth { get; set; }
 
@@ -37,5 +37,7 @@ public partial class OffertaMontaggio
 
     public double? TotaleTest { get; set; }
 
-    public double? Costoacquisto { get; set; }
+    public double? CostoAcquisto { get; set; }
+
+    public virtual Offerta IdOffertaNavigation { get; set; } = null!;
 }
